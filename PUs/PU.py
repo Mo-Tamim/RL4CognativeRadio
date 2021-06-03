@@ -1,11 +1,10 @@
 # Primary user Class 
 
 import torch 
-print(torch.__version__ )
 class PU: 
-    def __init__(self): 
+    def __init__(self,Horizon=20): 
         self.id = 0 
-        self.horizon = 20 
+        self.horizon = Horizon 
         self.TxPattern = torch.zeros(self.horizon, 1)
         self.timer = 0 
     
@@ -20,7 +19,8 @@ class PU:
             self.issueWarning() 
 
 if  __name__ == "__main__":
-    PU_test = PU()
+    PU_test = PU(2)
     PU_test.createTxPattern()
     print(PU_test.TxPattern)
 
+    print(torch.__version__)
