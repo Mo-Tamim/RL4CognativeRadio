@@ -26,7 +26,9 @@ class Env(gym.Env):
 
     def reset(self):
         self.Timer = 0
-        o = torch.tensor([self.Timer], dtype=torch.float)
+        # o = torch.tensor([self.Timer], dtype=torch.float)
+        # o = torch.tensor([self.Timer])
+        o = self.Timer
         return o
     
 
@@ -35,13 +37,16 @@ class Env(gym.Env):
         
         self.Timer = int(o)
         if self.Timer < self.Horizon:  # non-terminal observation, horizon not reached
-            r = torch.sum((action == self.TxPattern[self.Timer,:])) 
+            # r = torch.sum((action == self.TxPattern[self.Timer,:]).astype(torch.int)) 
+            r = int(action == self.TxPattern[self.Timer,:])
 
         else:  # gym horizon reached
             r = 0.0
 
         self.Timer += 1  # increment our time-step / observation
-        o = torch.tensor([self.Timer], dtype=torch.float) # observation that will return
+        # o = torch.tensor([self.Timer], dtype=torch.float) # observation that will return
+        # o = torch.tensor([self.Timer]) # observation that will return
+        o = self.Timer # observation that will return
         done = (self.Timer == torch.tensor([self.Horizon]))  # is terminal gym state reached
         # print("o: {} r: {} action: {}".format(o,r,action))
         return o, r, done, {}  # gyms always returns <obs, reward, terminal obs reached, debug/info dictionary>
