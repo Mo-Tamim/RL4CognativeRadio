@@ -6,3 +6,6 @@ In this repository we have:
 3. Environments
 4. Agents 
 5. Policies 
+
+
+More details and update about this repo will be uploaded soon
